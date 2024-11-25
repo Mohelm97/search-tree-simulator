@@ -12,6 +12,8 @@ export default class ExportImportBox extends Accordion {
      */
     constructor(nodesLayer, connectionsLayer) {
         const parent = document.querySelector("#ui-overlay #right-side");
+        if (window.localStorage.getItem("sts_autosave") === undefined) window.localStorage.setItem("sts_autosave", true);
+        const isAutoSavedChecked = window.localStorage.getItem("sts_autosave") === "true";
         super(
             parent,
             "Export/Import Graph",
@@ -20,10 +22,11 @@ export default class ExportImportBox extends Accordion {
             <button id="export-graph">Export Graph</button>
             <button id="import-graph">Import Graph</button>
             <div style="display: flex;flex-direction: row;align-items: center;">
-                <input type="checkbox" checked id="auto-save">
+                <input type="checkbox" ${isAutoSavedChecked ? "checked" : ""} id="auto-save">
                 <label for="auto-save" style="pointer-events:auto">Auto Save</label>
             </div>
             <button id="reset-sample">Reset Sample</button>
+            <button id="clear">Clear</button>
         </div>`
         );
         this.nodesLayer = nodesLayer;
@@ -33,14 +36,26 @@ export default class ExportImportBox extends Accordion {
         this.autoSaveInterval = setInterval(this.savaToLocalStorage.bind(this), 1000);
         this.accordion.querySelector("#auto-save").addEventListener("change", (e) => {
             if (e.target.checked) {
+                window.localStorage.setItem("sts_autosave", true);
                 this.autoSaveInterval = setInterval(this.savaToLocalStorage.bind(this), 1000);
             } else if (this.autoSaveInterval) {
+                window.localStorage.setItem("sts_autosave", false);
                 clearInterval(this.autoSaveInterval);
                 delete this.autoSaveInterval;
             }
         });
         this.accordion.querySelector("#reset-sample").addEventListener("click", () => {
             this.importGraph(sampleGraph);
+        });
+        this.accordion.querySelector("#clear").addEventListener("click", () => {
+            this.importGraph({
+                nodes: [],
+                connections: [],
+                stage: {
+                    x: nodesLayer.getStage().width() / 2,
+                    y: nodesLayer.getStage().height() / 2,
+                },
+            });
         });
     }
     savaToLocalStorage() {
