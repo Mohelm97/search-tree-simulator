@@ -62,6 +62,9 @@ export default class CodeWindow {
             ".cm-activeLine": {
                 backgroundColor: "transparent", // Remove background highlight
             },
+            ".cm-selectionBackground": {
+                backgroundColor: "#44475a !important", // Fix thememirror shits!
+            },
         });
         this.editor = new EditorView({
             extensions: [basicSetup, javascript(), customStyle, dracula, indentUnit.of("    "), EditorState.tabSize.of(4), keymap.of([indentWithTab])],

@@ -71,6 +71,7 @@
 
 #codearea>.cm-editor {
     height: 400px;
+    font-size: 14px;
     text-align: left;
     overflow-x:hidden;
 }
