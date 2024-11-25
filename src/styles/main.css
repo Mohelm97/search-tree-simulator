@@ -1,0 +1,152 @@
+body {
+    background: linear-gradient(145deg, #16191f, #1b1e25); 
+    color: #c0d1dc; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    user-select: none;
+}
+#ui-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 22px);
+    pointer-events: none;
+}
+#ui-overlay>*{
+    pointer-events: auto;
+}
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+    background-color: #16191f;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: left;
+    font-size: 12px;
+}
+a, a:visited {
+    color: #005fa3;
+}
+a:hover {
+    color: #007acc;
+}
+a:active {
+    color: #005fa3;
+}
+
+.text-input {
+    width: calc(100% - 16px);
+    padding: 8px;
+    font-size: 12px;
+    border: 1px solid #2a2f3a;
+    border-radius: 4px;
+    background: #20232a;
+    color: #e0e8f0;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.text-input:focus {
+    border-color: #007acc; 
+}
+button {
+    padding: 6px 12px;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    background: #2a2f3a; 
+    color: #b0c7d1;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+button:hover {
+    background: #007acc; 
+    color: #ffffff; 
+}
+
+button:active {
+    background: #005fa3; 
+}
+button:disabled {
+    background: #3a3f4a; 
+    color: #7c8b97; 
+    cursor: not-allowed; 
+    opacity: 0.7; 
+    transition: none; 
+}
+
+button:disabled:hover {
+    background: #3a3f4a; 
+    color: #7c8b97;
+}
+button.primary {
+    background: #007acc; 
+    color: #ffffff; 
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+button.primary:hover {
+    background: #005fa3;
+}
+
+button.primary:active {
+    background: #00407d;
+}
+
+button.primary:disabled {
+    background: #3a3f4a;
+    color: #7c8b97;
+    cursor: not-allowed;
+    opacity: 0.7;
+    transition: none;
+}
+
+
+select {
+    width: 100%;
+    padding: 8px;
+    font-size: 12px;
+    border: 1px solid #2a2f3a;
+    border-radius: 4px;
+    background: #20232a; 
+    color: #e0e8f0;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+select:focus {
+    border-color: #007acc; 
+    background: #1e2430; 
+}
+
+select:disabled {
+    background: #3a3f4a; 
+    color: #7c8b97; 
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+select option {
+    background: #20232a; 
+    color: #e0e8f0; 
+}
+
+select option:checked {
+    background: #007acc; 
+    color: #ffffff; 
+}
+@import url(./simulation-controls.css);
+@import url(./icons/icons.css);

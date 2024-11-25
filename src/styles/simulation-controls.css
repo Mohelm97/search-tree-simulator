@@ -1,0 +1,82 @@
+.simulation-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #1c1f26; 
+    border: 1px solid #2a2f3a; 
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    animation: simulationControlsFadeIn 0.2s ease-in-out;
+}
+.simulation-controls.hidden {
+    display: none;
+}
+@keyframes simulationControlsFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translate(-50%, 0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translate(-50%, 0);
+    }
+}
+
+.control-button {
+    background: #007ACC;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-button i {
+    font-size: 16px;
+}
+
+.control-button:active {
+    background: #005FA3;
+    transform: scale(0.95);
+}
+.speed-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff;
+    font-size: 12px;
+}
+
+#speed-slider {
+    width: 120px;
+    cursor: pointer;
+    appearance: none;
+    background: #2a2f3a;
+    border-radius: 4px;
+    height: 6px;
+    margin-top: 4px;
+}
+
+#speed-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #007ACC;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#speed-slider::-webkit-slider-thumb:active {
+    background: #005FA3;
+}
