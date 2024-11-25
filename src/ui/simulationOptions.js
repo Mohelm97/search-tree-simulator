@@ -63,4 +63,14 @@ export default class SimulationOptions extends Accordion {
         };
         this.nodesLayer.on("nodeclick", getNode);
     }
+    setDisabled(disabled) {
+        const elements = this.accordion.querySelectorAll("input, button, select");
+        for (const element of elements) {
+            if (disabled) {
+                element.setAttribute("disabled", disabled);
+            } else {
+                element.removeAttribute("disabled");
+            }
+        }
+    }
 }

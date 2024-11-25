@@ -52,6 +52,13 @@ export default class Simulator {
         this.goalNode.setState("Goal");
         this.fire("reset");
     }
+    end() {
+        for (const node of this.nodesLayer.children) {
+            node.setState("Normal");
+        }
+        this.startNode.setState("Start");
+        this.goalNode.setState("Goal");
+    }
     step() {
         const nextGen = this.generator.next();
         const newNode = nextGen.value;

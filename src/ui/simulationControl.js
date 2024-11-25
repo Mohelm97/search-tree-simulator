@@ -16,6 +16,7 @@ export default class SimulationControl {
             <input id="speed-slider" type="range" class="speed-slider" min="100" max="2000" step="100" value="500">
         </div>
         <button id="increase-speed"><i class="icon-last"></i></button>
+        <button id="stop-simulation"><i class="icon-last"></i></button>
         `;
         document.querySelector("#ui-overlay").append(this.element);
         const speedSlider = this.element.querySelector("#speed-slider");
@@ -64,6 +65,10 @@ export default class SimulationControl {
             this.element.querySelector("#pause").classList.add("hidden");
             if (this.playTimeout) clearTimeout(this.playTimeout);
             this.isPlaying = false;
+        });
+        this.element.querySelector("#stop-simulation").addEventListener("click", () => {
+            this.simulator.end();
+            this.hide();
         });
         this.playTimeout = undefined;
     }
