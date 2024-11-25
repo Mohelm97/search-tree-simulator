@@ -27,7 +27,7 @@
     }
 }
 
-.control-button {
+.simulation-controls button {
     background: #007ACC;
     color: #ffffff;
     border: none;
@@ -41,13 +41,16 @@
     justify-content: center;
 }
 
-.control-button i {
+.simulation-controls button i {
     font-size: 16px;
 }
 
-.control-button:active {
+.simulation-controls button:active {
     background: #005FA3;
     transform: scale(0.95);
+}
+.simulation-controls .hidden {
+    display: none;
 }
 .speed-control {
     display: flex;
