@@ -19,19 +19,14 @@ const sampleAlgorthims = [
         name: "Breadth-first",
         code: `const strategy = function* (startNode, goalNode) {
     const openList = [startNode];
-    const addChildrenToList = (node) => {
-        const length = node.getConnectionsCount();
-        for (let i = 0; i < length; i++) {
-            const child = node.getConnectedNode(i);
-            if (openList.indexOf(child) === -1) openList.push(child);
-        }
-    };
-
     for (let i = 0; i < openList.length; i++) {
         const node = openList[i];
         if (node === goalNode) return node;
         yield node;
-        addChildrenToList(node);
+        const children = node.getConnectedNodes();
+        for(const child of children) {
+            if(openList.indexOf(child) === -1) openList.push(child);
+        }
     }
 }`,
     },

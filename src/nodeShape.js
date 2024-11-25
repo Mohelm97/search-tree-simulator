@@ -75,6 +75,13 @@ export default class NodeShape extends Konva.Group {
     getConnectedNode(index) {
         return this.connections[index].getOther(this);
     }
+    getConnectedNodes() {
+        const result = [];
+        for (const connection of this.connections) {
+            result.push(connection.getOther(this));
+        }
+        return result;
+    }
     /**
      *
      * @param {"Normal" | "InMemory" | "CurrentlyProcessing" | "NotInMemory" | "Goal" | "Start"} state
