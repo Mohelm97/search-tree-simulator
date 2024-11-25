@@ -68,6 +68,12 @@ export default class SimulationControl {
      */
     setSimulator(simulator) {
         this.simulator = simulator;
+        simulator.on("finish", (node) => {
+            this.setIsFinished(true);
+        });
+        simulator.on("reset", () => {
+            this.setIsFinished(false);
+        });
     }
     setIsFinished(isFinished) {
         this.isFinished = isFinished;
@@ -77,9 +83,9 @@ export default class SimulationControl {
         } else {
             this.element.querySelector(".step-forward").removeAttribute("disabled");
             this.element.querySelector(".play").removeAttribute("disabled");
-            if (this.playTimeout) clearTimeout(this.playTimeout);
-            this.isPlaying = false;
         }
+        if (this.playTimeout) clearTimeout(this.playTimeout);
+        this.isPlaying = false;
     }
     show() {
         this.element.classList.remove("hidden");

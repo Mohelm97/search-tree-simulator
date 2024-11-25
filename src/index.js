@@ -129,7 +129,7 @@ stage.add(nodesLayer);
 new InfoBox(stage, nodesLayer);
 const simulationControl = new SimulationControl();
 const simulationOptions = new SimulationOptions(nodesLayer, () => {
-    simulationControl.setSimulator(new Simulator(simulationControl, nodesLayer, connectionsLayer, simulationOptions.startNode, simulationOptions.goalNode, simulationOptions.codeWindow.getCode()));
+    simulationControl.setSimulator(new Simulator(nodesLayer, connectionsLayer, simulationOptions.startNode, simulationOptions.goalNode, simulationOptions.codeWindow.getCode()));
     simulationControl.show();
 });
 const exportImportBox = new ExportImportBox(nodesLayer, connectionsLayer);

@@ -12,21 +12,35 @@ export default class Simulator {
      * @param {NodeShape} goalNode
      * @param {string} strategyCode
      */
-    constructor(simulationControl, nodesLayer, connectionsLayer, startNode, goalNode, strategyCode) {
+    constructor(nodesLayer, connectionsLayer, startNode, goalNode, strategyCode) {
         this.nodesLayer = nodesLayer;
         this.connectionsLayer = connectionsLayer;
         this.startNode = startNode;
         this.goalNode = goalNode;
         this.strategyCode = strategyCode;
         this.strategyFunction = eval(strategyCode + ";strategy");
-        this.simulationControl = simulationControl;
         this.currentNode = startNode;
         this.generator = this.strategyFunction(startNode, goalNode);
+        this.events = {};
         for (const node of nodesLayer.children) {
             node.setState("NotInMemory");
         }
         this.startNode.setState("Start");
         this.goalNode.setState("Goal");
+    }
+    on(event, handler) {
+        if (!this.events[event]) this.events[event] = [];
+        this.events[event].push(handler);
+    }
+    off(event, handler) {
+        if (this.events[event]) this.events[event] = this.events[event].filter((h) => h !== handler);
+    }
+    fire(event, param) {
+        if (this.events[event]) {
+            for (const handler of this.events[event]) {
+                handler(param);
+            }
+        }
     }
     reset() {
         this.currentNode = this.startNode;
@@ -36,7 +50,7 @@ export default class Simulator {
         }
         this.startNode.setState("Start");
         this.goalNode.setState("Goal");
-        this.simulationControl.setIsFinished(false);
+        this.fire("reset");
     }
     step() {
         const nextGen = this.generator.next();
@@ -45,10 +59,7 @@ export default class Simulator {
         newNode?.setState("CurrentlyProcessing");
         this.currentNode = newNode;
         if (nextGen.done) {
-            if (newNode === this.goalNode) {
-                this.simulationControl.setIsFinished(true);
-                console.log("Found Goal node!");
-            }
+            this.fire("finish", newNode);
         }
     }
 }
