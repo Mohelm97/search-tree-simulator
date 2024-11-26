@@ -38,6 +38,7 @@ export default class NodeConnection extends Konva.Group {
         });
 
         this.tag.on("pointerclick", (e) => {
+            if (e.evt.button != 0) return;
             if (this.weightPrompt && this.weightPrompt.isConnected) {
                 this.weightPrompt.querySelector("input").focus();
                 return;

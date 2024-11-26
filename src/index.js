@@ -30,6 +30,7 @@ var nodesLayer = new Konva.Layer();
 let lastPointerX = 0;
 let lastPointerY = 0;
 let selectedNode = null;
+let selectedConnection = null;
 PointerEvent.prototype.globalX = function () {
     return this.x - stage.x();
 };
@@ -40,10 +41,16 @@ stage.on("pointerdown", (e) => {
     lastPointerX = e.evt.globalX();
     lastPointerY = e.evt.globalY();
     selectedNode = null;
+    selectedConnection = null;
     if (e.target instanceof NodeShape) {
         selectedNode = e.target;
     } else if (e.target.parent instanceof NodeShape) {
         selectedNode = e.target.parent;
+    }
+    if (e.target instanceof NodeConnection) {
+        selectedConnection = e.target;
+    } else if (e.target.parent instanceof NodeConnection) {
+        selectedConnection = e.target.parent;
     }
     if (selectedNode != null) {
         selectedNode.setZIndex(selectedNode.parent.children.length - 1);
@@ -111,6 +118,11 @@ const contextMenuOptions = [
             stage.on("pointermove", dragLine);
             nodesLayer.on("nodeclick", makeConnection);
         },
+    },
+    {
+        text: "Disconnect",
+        isVisible: () => selectedConnection != null,
+        onClick: () => selectedConnection.remove(),
     },
 ];
 contextMenu(contextMenuOptions);
