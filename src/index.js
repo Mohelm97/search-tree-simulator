@@ -4,29 +4,29 @@ import contextMenu from "./ui/contextMenu";
 import InfoBox from "./ui/infoBox";
 import SimulationOptions from "./ui/simulationOptions";
 import ExportImportBox from "./ui/exportImportBox";
+import SimulationControl from "./ui/simulationControl";
+import SimulationLegend from "./ui/simulationLegend";
 import Grid from "./grid";
 import NodeShape from "./nodeShape";
 import NodeConnection from "./nodeConnection";
 import sampleGraph from "./samples/sampleGraph";
-import "./styles/main.css";
-import SimulationControl from "./ui/simulationControl";
-import SimulationLegend from "./ui/simulationLegend";
 import Simulator from "./simulator";
+import "./styles/main.css";
 
 const sceneWidth = window.innerWidth;
 const sceneHeight = window.innerHeight;
 
-var stage = new Konva.Stage({
+const stage = new Konva.Stage({
     container: "container",
     width: sceneWidth,
     height: sceneHeight,
     draggable: true,
 });
 stage.position({ x: sceneWidth / 2, y: sceneHeight / 2 });
-var gridLayer = new Grid(15, stage);
 
-var connectionsLayer = new Konva.Layer();
-var nodesLayer = new Konva.Layer();
+const gridLayer = new Grid(15, stage);
+const connectionsLayer = new Konva.Layer();
+const nodesLayer = new Konva.Layer();
 let lastPointerX = 0;
 let lastPointerY = 0;
 let selectedNode = null;
@@ -56,6 +56,15 @@ stage.on("pointerdown", (e) => {
         selectedNode.setZIndex(selectedNode.parent.children.length - 1);
     }
 });
+nodesLayer.on("nodeclick", (selectedNode) => {
+    for (const node of nodesLayer.children) {
+        if (node === selectedNode) {
+            node.setIsSelected(true);
+        } else if (node.isSelected) {
+            node.setIsSelected(false);
+        }
+    }
+});
 
 const contextMenuOptions = [
     {
@@ -78,16 +87,12 @@ const contextMenuOptions = [
     {
         text: "Rename node",
         isVisible: () => selectedNode != null,
-        onClick: () => {
-            selectedNode.showRenamePrompt();
-        },
+        onClick: () => selectedNode.showRenamePrompt(),
     },
     {
         text: "Remove node",
         isVisible: () => selectedNode != null,
-        onClick: () => {
-            selectedNode.remove();
-        },
+        onClick: () => selectedNode.remove(),
     },
     {
         text: "Connect",
@@ -127,18 +132,10 @@ const contextMenuOptions = [
 ];
 contextMenu(contextMenuOptions);
 
-nodesLayer.on("nodeclick", (selectedNode) => {
-    for (const node of nodesLayer.children) {
-        if (node === selectedNode) {
-            node.setIsSelected(true);
-        } else if (node.isSelected) {
-            node.setIsSelected(false);
-        }
-    }
-});
 stage.add(gridLayer);
 stage.add(connectionsLayer);
 stage.add(nodesLayer);
+
 new InfoBox(stage, nodesLayer);
 const simulationLegend = new SimulationLegend();
 const simulationControl = new SimulationControl();
@@ -152,6 +149,7 @@ const simulationOptions = new SimulationOptions(nodesLayer, () => {
     });
 });
 const exportImportBox = new ExportImportBox(nodesLayer, connectionsLayer);
+
 if (window.localStorage.getItem("sts_graph")) {
     exportImportBox.importGraph(JSON.parse(window.localStorage.getItem("sts_graph")));
 } else {
@@ -165,6 +163,7 @@ function fitStageIntoParentContainer() {
     // stage.scale({ x: scale, y: scale });
     stage.width(window.innerWidth);
     stage.height(window.innerHeight);
+    gridLayer.createGrid();
 }
 
 fitStageIntoParentContainer();
