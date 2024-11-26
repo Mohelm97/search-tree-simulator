@@ -52,6 +52,12 @@ export default class NodeConnection extends Konva.Group {
                 this.weightPrompt = null;
             });
         });
+        this.tag.on("pointerenter", () => {
+            document.body.style.cursor = "pointer";
+        });
+        this.tag.on("pointerleave", () => {
+            document.body.style.cursor = "";
+        });
         this.update();
         this.add(this.line);
         this.add(this.tag);

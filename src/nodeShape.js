@@ -45,6 +45,18 @@ export default class NodeShape extends Konva.Group {
         this.on("pointerclick", (e) => {
             this.parent.fire("nodeclick", this);
         });
+        this.on("pointerenter", () => {
+            document.body.style.cursor = "grab";
+        });
+        this.on("pointerleave", () => {
+            document.body.style.cursor = "";
+        });
+        this.on("pointerdown", () => {
+            document.body.style.cursor = "grabbing";
+        });
+        this.on("dragend", () => {
+            document.body.style.cursor = "grab";
+        });
         this.add(circle);
         this.add(text);
     }
