@@ -11,10 +11,13 @@
     bottom: 10px;
     left: 50%;
     transform: translate(-50%, 0);
+    transform-origin: 0 50%;
     animation: simulationControlsFadeIn 0.2s ease-in-out;
+    transition: display 0.2s allow-discrete;
 }
 .simulation-controls.hidden {
     display: none;
+    animation: simulationControlsFadeOut 0.2s ease-in-out;
 }
 @keyframes simulationControlsFadeIn {
     from {
@@ -24,6 +27,16 @@
     to {
         opacity: 1;
         transform: scale(1) translate(-50%, 0);
+    }
+}
+@keyframes simulationControlsFadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1) translate(-50%, 0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95) translate(-50%, 0);
     }
 }
 

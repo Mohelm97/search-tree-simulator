@@ -10,6 +10,7 @@ import NodeConnection from "./nodeConnection";
 import sampleGraph from "./samples/sampleGraph";
 import "./styles/main.css";
 import SimulationControl from "./ui/simulationControl";
+import SimulationLegend from "./ui/simulationLegend";
 import Simulator from "./simulator";
 
 const sceneWidth = window.innerWidth;
@@ -127,10 +128,16 @@ stage.add(gridLayer);
 stage.add(connectionsLayer);
 stage.add(nodesLayer);
 new InfoBox(stage, nodesLayer);
+const simulationLegend = new SimulationLegend();
 const simulationControl = new SimulationControl();
 const simulationOptions = new SimulationOptions(nodesLayer, () => {
-    simulationControl.setSimulator(new Simulator(nodesLayer, connectionsLayer, simulationOptions.startNode, simulationOptions.goalNode, simulationOptions.codeWindow.getCode()));
+    const simulator = new Simulator(nodesLayer, connectionsLayer, simulationOptions.startNode, simulationOptions.goalNode, simulationOptions.codeWindow.getCode());
+    simulationControl.setSimulator(simulator);
     simulationControl.show();
+    simulationLegend.show();
+    simulator.on("end", () => {
+        simulationLegend.hide();
+    });
 });
 const exportImportBox = new ExportImportBox(nodesLayer, connectionsLayer);
 if (window.localStorage.getItem("sts_graph")) {

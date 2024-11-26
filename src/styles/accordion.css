@@ -21,6 +21,12 @@
     font-size: 11px; 
     color: #b0c7d1; 
     text-align: left;
+    overflow: hidden;
+    transition: visibility 0.2s allow-discrete, opacity 0.2s ease-in-out;
+}
+.accordion.hidden {
+    visibility:hidden; /* oh god, I hate display none with transition */
+    opacity: 0;
 }
 .accordion span {
     text-overflow: ellipsis;
@@ -28,7 +34,6 @@
 .accordion .content {
     max-height: 0; 
     padding-top: 0;
-    overflow: hidden; 
     transition: max-height 0.3s ease, padding-top 0.3s ease, opacity 0.3s ease; 
     opacity: 0;
 }

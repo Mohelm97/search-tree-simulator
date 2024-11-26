@@ -58,6 +58,7 @@ export default class Simulator {
         }
         this.startNode.setState("Start");
         this.goalNode.setState("Goal");
+        this.fire("end");
     }
     step() {
         const nextGen = this.generator.next();

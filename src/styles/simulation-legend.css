@@ -1,0 +1,40 @@
+.legend-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.legend-row:last-child {
+    margin-bottom: 0;
+}
+.legend-row .circle {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: red;
+}
+.legend-row .circle.in-memory {
+    background-color: #FFC107;
+    border: solid 2px #FFA000;
+    box-shadow: #FFD54F 0 0 10px ;
+}
+.legend-row .circle.currently-processing {
+    background-color: #8E24AA;
+    border: solid 2px #6A1B9A;
+    box-shadow: #BA68C8 2px 2px 10px ;
+}
+.legend-row .circle.not-in-memory {
+    background-color: #616161;
+    border: dashed 2px #424242;
+}
+.legend-row .circle.goal {
+    background-color: #4CAF50;
+    border: solid 3px #388E3C;
+    box-shadow: #66BB6A 0 0 15px ;
+}
+.legend-row .circle.start {
+    background-color: #2196F3;
+    border: solid 3px #1976D2;
+    box-shadow: #64B5F6 0 0 15px ;
+}
