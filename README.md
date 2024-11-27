@@ -6,6 +6,12 @@ The **Search Tree Simulator** is an interactive web-based tool designed to help 
 
 ![Search Tree Simulator Screenshot](assets/screenshot.png)
 
+## Demo
+
+You can try out the **Search Tree Simulator** live on GitHub Pages here:
+
+[Search Tree Simulator Demo](https://mohelm97.github.io/search-tree-simulator/)
+
 ## Features
 
 -   Visualize the execution of different search algorithms.
