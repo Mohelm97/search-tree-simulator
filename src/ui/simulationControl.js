@@ -84,6 +84,7 @@ export default class SimulationControl {
         simulator.on("reset", () => {
             this.setIsFinished(false);
         });
+        this.setIsFinished(false);
     }
     setIsFinished(isFinished) {
         this.isFinished = isFinished;
