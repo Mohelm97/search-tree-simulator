@@ -23,7 +23,7 @@ body {
 #ui-overlay>*{
     pointer-events: auto;
 }
-#footer {
+footer {
     position: fixed;
     bottom: 0;
     left: 0;
