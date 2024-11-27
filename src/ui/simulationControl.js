@@ -106,4 +106,7 @@ export default class SimulationControl {
     hide() {
         this.element.classList.add("hidden");
     }
+    isHidden() {
+        return this.element.classList.contains("hidden");
+    }
 }
