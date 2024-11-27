@@ -3,6 +3,7 @@ import NodeShape from "../nodeShape";
 import NodeConnection from "../nodeConnection";
 import Accordion from "./accordion";
 import sampleGraph from "../samples/sampleGraph";
+import sampleTree from "../samples/sampleTree";
 
 export default class ExportImportBox extends Accordion {
     /**
@@ -25,7 +26,8 @@ export default class ExportImportBox extends Accordion {
                 <input type="checkbox" ${isAutoSavedChecked ? "checked" : ""} id="auto-save">
                 <label for="auto-save" style="pointer-events:auto">Auto Save</label>
             </div>
-            <button id="reset-sample">Reset Sample</button>
+            <button id="reset-sample-1">Reset to Sample 1</button>
+            <button id="reset-sample-2">Reset to Sample 2</button>
             <button id="clear">Clear</button>
         </div>`
         );
@@ -44,8 +46,11 @@ export default class ExportImportBox extends Accordion {
                 delete this.autoSaveInterval;
             }
         });
-        this.accordion.querySelector("#reset-sample").addEventListener("click", () => {
+        this.accordion.querySelector("#reset-sample-1").addEventListener("click", () => {
             this.importGraph(sampleGraph);
+        });
+        this.accordion.querySelector("#reset-sample-2").addEventListener("click", () => {
+            this.importGraph(sampleTree);
         });
         this.accordion.querySelector("#clear").addEventListener("click", () => {
             this.importGraph({

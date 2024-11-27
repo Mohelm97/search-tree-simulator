@@ -22,7 +22,7 @@ export default class SimulationOptions extends Accordion {
             <label for="goal-node">Goal Node:</label>
             <button id="goal-node">Select Node</button>
             <label for="preset-algorthim">Selection Algorthim:</label>
-            <select id="preset-algorthim" value="0">${algorthimsOptions}<option value="-1">Custom</option></select>
+            <select id="preset-algorthim" value="0">${algorthimsOptions}</select>
             <button id="edit-code">Edit Code</button>
             <button id="start-simulation" disabled class="primary">Start Simulation</button>
         </div>`

@@ -208,5 +208,20 @@ const strategy = function* (startNode, goalNode) {
     }
 };`,
     },
+    {
+        name: "Custom Strategy (Blank Template)",
+        code: `const strategy = function* (startNode, goalNode) {
+    // This is a blank template for you to customize your own strategy.
+    // The function is a generator that yields nodes as it traverses the search space.
+    // You can look at other strategies above to see how they are implemented.
+
+    // Example: To start, just return the startNode as the result.
+    // You can modify this logic to implement your own algorithm.
+    yield startNode;
+
+    // Return the same node for now (you can replace this with your own traversal logic)
+    return startNode;
+};`,
+    },
 ];
 export default sampleAlgorthims;

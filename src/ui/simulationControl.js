@@ -12,7 +12,7 @@ export default class SimulationControl {
         <button id="step-forward" style="margin-right: 10px"><i class="icon-next"></i></button>
         <button id="decrease-speed"><i class="icon-first"></i></button>
         <div class="speed-control">
-            <label for="speed-slider">Speed: <span id="speed-value">500ms</span></label>
+            <label for="speed-slider">Delay: <span id="speed-value">500ms</span></label>
             <input id="speed-slider" type="range" class="speed-slider" min="100" max="2000" step="100" value="500">
         </div>
         <button id="increase-speed"><i class="icon-last"></i></button>
