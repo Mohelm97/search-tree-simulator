@@ -24,6 +24,7 @@ export default class Simulator {
         this.events = {};
         for (const node of nodesLayer.children) {
             node.setState("NotInMemory");
+            node.removeNote();
         }
         this.startNode.setState("Start");
         this.goalNode.setState("Goal");
@@ -47,6 +48,7 @@ export default class Simulator {
         this.generator = this.strategyFunction(this.startNode, this.goalNode);
         for (const node of this.nodesLayer.children) {
             node.setState("NotInMemory");
+            node.removeNote();
         }
         this.startNode.setState("Start");
         this.goalNode.setState("Goal");

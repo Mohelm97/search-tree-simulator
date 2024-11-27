@@ -28,10 +28,10 @@ export default class NodeShape extends Konva.Group {
         });
         const text = new Konva.Text({
             text: name,
-            x: 5,
-            y: 5,
-            width: 50,
-            height: 50,
+            x: 0,
+            y: 0,
+            width: 60,
+            height: 60,
             align: "center",
             verticalAlign: "middle",
             fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
@@ -93,6 +93,28 @@ export default class NodeShape extends Konva.Group {
             result.push(connection.getOther(this));
         }
         return result;
+    }
+    addNote(note) {
+        if (this.note) {
+            this.note.text(note);
+            return;
+        }
+        this.note = new Konva.Text({
+            x: -20,
+            y: 70,
+            width: 100,
+            align: "center",
+            verticalAlign: "middle",
+            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+            fontSize: 12,
+            fill: "white",
+            text: note,
+        });
+        this.add(this.note);
+    }
+    removeNote() {
+        this.note?.remove();
+        delete this.note;
     }
     /**
      *

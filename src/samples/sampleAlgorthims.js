@@ -189,6 +189,7 @@ const strategy = function* (startNode, goalNode) {
         const nodeData = openList.shift();
         const node = nodeData.node;
         if (node === goalNode) return node;
+        node.addNote(\`\${f(nodeData, goalNode)} = \${g(nodeData, goalNode)} + \${h(node, goalNode)}\`)
         yield node;
         closedList.push(node);
         const length = node.getConnectionsCount();
@@ -197,7 +198,10 @@ const strategy = function* (startNode, goalNode) {
             const weight = node.getConnectionWeight(i);
             if (closedList.indexOf(child) === -1) {
                 const cost = nodeData.cost + weight;
-                openList.push({ cost: cost, node: child });
+                const childData = { cost: cost, node: child };
+                openList.push(childData);
+                child.setState("InMemory");
+                child.addNote(\`\${f(childData, goalNode)} = \${g(childData, goalNode)} + \${h(child, goalNode)}\`)
             }
         }
         openList.sort((a, b) => f(a, goalNode) - f(b, goalNode));
