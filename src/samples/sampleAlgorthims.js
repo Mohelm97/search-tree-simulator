@@ -93,5 +93,116 @@ const strategy = function* (currentNode, goalNode) {
     }
 };`,
     },
+    {
+        name: "Greedy best-first search",
+        code: `const hTable = {
+    "Bucharest": {
+        "Arad": 366,
+        "Bucharest": 0,
+        "Craiova": 160,
+        "Drobeta": 242,
+        "Eforie": 161,
+        "Fagaras": 176,
+        "Giurgiu": 77,
+        "Hirsova": 151,
+        "Iasi": 226,
+        "Lugoj": 244,
+        "Mehadia": 241,
+        "Neamt": 234,
+        "Oradea": 380,
+        "Pitesti": 100,
+        "Rimnicu Vilcea": 193,
+        "Sibiu": 253,
+        "Timisoara": 329,
+        "Urziceni": 80,
+        "Vaslui": 199,
+        "Zerind": 374,
+    },
+};
+const h = (node, goalNode) => {
+    // Retrieves the heuristic value h(n) for a node relative to the goal node.
+    // You can modify this function to implement custom heuristics.
+    // For example, you can calculate the Euclidean distance between nodes 
+    // using node.x() and node.y().
+    if (hTable[goalNode.name]?.[node.name] !== undefined)
+        return hTable[goalNode.name][node.name];
+    return Infinity;
+};
+const strategy = function* (startNode, goalNode) {
+    const openList = [startNode];
+    const closedList = [];
+    while (openList.length > 0) {
+        const node = openList.shift();
+        if (node === goalNode) return node;
+        yield node;
+        closedList.push(node);
+        const children = node.getConnectedNodes();
+        for (const child of children) {
+            if (!openList.includes(child) && !closedList.includes(child))
+                openList.push(child);
+        }
+        openList.sort((a, b) => h(a, goalNode) - h(b, goalNode));
+    }
+};`,
+    },
+    {
+        name: "A* search",
+        code: `const hTable = {
+    "Bucharest": {
+        "Arad": 366,
+        "Bucharest": 0,
+        "Craiova": 160,
+        "Drobeta": 242,
+        "Eforie": 161,
+        "Fagaras": 176,
+        "Giurgiu": 77,
+        "Hirsova": 151,
+        "Iasi": 226,
+        "Lugoj": 244,
+        "Mehadia": 241,
+        "Neamt": 234,
+        "Oradea": 380,
+        "Pitesti": 100,
+        "Rimnicu Vilcea": 193,
+        "Sibiu": 253,
+        "Timisoara": 329,
+        "Urziceni": 80,
+        "Vaslui": 199,
+        "Zerind": 374,
+    },
+};
+const h = (node, goalNode) => {
+    // Retrieves the heuristic value h(n) for a node relative to the goal node.
+    // You can modify this function to implement custom heuristics.
+    // For example, you can calculate the Euclidean distance between nodes 
+    // using node.x() and node.y().
+    if (hTable[goalNode.name]?.[node.name] !== undefined)
+        return hTable[goalNode.name][node.name];
+    return Infinity;
+};
+const g = (nodeData, goalNode) => nodeData.cost;
+const f = (nodeData, goalNode) => g(nodeData, goalNode) + h(nodeData.node, goalNode);
+const strategy = function* (startNode, goalNode) {
+    const openList = [{ cost: 0, node: startNode }];
+    const closedList = [];
+    while (openList.length > 0) {
+        const nodeData = openList.shift();
+        const node = nodeData.node;
+        if (node === goalNode) return node;
+        yield node;
+        closedList.push(node);
+        const length = node.getConnectionsCount();
+        for (let i = 0; i < length; i++) {
+            const child = node.getConnectedNode(i);
+            const weight = node.getConnectionWeight(i);
+            if (closedList.indexOf(child) === -1) {
+                const cost = nodeData.cost + weight;
+                openList.push({ cost: cost, node: child });
+            }
+        }
+        openList.sort((a, b) => f(a, goalNode) - f(b, goalNode));
+    }
+};`,
+    },
 ];
 export default sampleAlgorthims;
