@@ -1,14 +1,21 @@
 {
   "name": "search-tree-simulator",
   "version": "1.0.0",
-  "description": "",
+  "description": "A visual simulator for search tree algorithms, demonstrating the search process step by step.",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
     "dev": "webpack serve --open --mode=development"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Mohammed N. Almadhoun <mohelm97@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mohelm97/search-tree-simulator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Mohelm97/search-tree-simulator/issues"
+  },
   "devDependencies": {
     "@babel/core": "^7.25.8",
     "@babel/preset-env": "^7.25.8",
