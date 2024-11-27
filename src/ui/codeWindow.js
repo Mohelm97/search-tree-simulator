@@ -3,7 +3,7 @@ import { indentUnit } from "@codemirror/language";
 import { basicSetup, EditorView } from "codemirror";
 import { dracula } from "thememirror";
 import { EditorState } from "@codemirror/state";
-import { highlightActiveLine, keymap } from "@codemirror/view";
+import { keymap } from "@codemirror/view";
 import { indentWithTab } from "@codemirror/commands";
 
 import "../styles/popup.css";

@@ -113,7 +113,7 @@ export default class ExportImportBox extends Accordion {
         for (const connection of data.connections) {
             connectionsLayer.add(new NodeConnection(nodesLayer.children[connection.startNodeIndex], nodesLayer.children[connection.endNodeIndex], connection.weight));
         }
-        nodesLayer.getStage().position(data.stage);
+        if (data.stage) nodesLayer.getStage().position(data.stage);
         nodesLayer.getStage().fire("dragmove");
     }
     importGraphFile() {
