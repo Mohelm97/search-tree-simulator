@@ -110,9 +110,19 @@ export default class NodeShape extends Konva.Group {
             fill: "white",
             text: note,
         });
+        this.noteBg = new Konva.Tag({
+            cornerRadius: 5,
+            width: 100,
+            height: this.note.height() + 10,
+            fill: "#222",
+            x: -20,
+            y: 65,
+        });
+        this.add(this.noteBg);
         this.add(this.note);
     }
     removeNote() {
+        this.noteBg?.remove();
         this.note?.remove();
         delete this.note;
     }
