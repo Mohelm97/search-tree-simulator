@@ -199,11 +199,19 @@ const strategy = function* (startNode, goalNode) {
             if (closedList.indexOf(child) === -1) {
                 const cost = nodeData.cost + weight;
                 const childData = { cost: cost, node: child };
+                const currentInOpen = openList.find((a) => a.node === child);
+                if (currentInOpen != undefined) {
+                    const oldF = f(currentInOpen, goalNode);
+                    const newF = f(childData, goalNode);
+                    if (oldF < newF)
+                        continue;
+                }
                 openList.push(childData);
                 child.setState("InMemory");
                 child.addNote(\`\${f(childData, goalNode)} = \${g(childData, goalNode)} + \${h(child, goalNode)}\`)
             }
         }
+        // Note that you should use priority queue but this is just a simulator !!
         openList.sort((a, b) => f(a, goalNode) - f(b, goalNode));
     }
 };`,
